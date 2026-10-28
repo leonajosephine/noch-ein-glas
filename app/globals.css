@@ -152,3 +152,11 @@ h1 { font-family: var(--font-editorial), Georgia, serif; font-size: clamp(70px, 
   .menu-margin-note { justify-content: flex-end; padding: 22px 12px 0; }
   .menu-footnote { margin-top: 28px; }
 }
+
+/* A restrained film finish, shared by all five photographs. */
+.photo { isolation: isolate; }
+.photo img { filter: contrast(.96) saturate(.9) brightness(1.025); }
+.photo::before,
+.photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.photo::before { z-index: 1; background: #efe1c8; opacity: .025; }
+.photo::after { z-index: 2; background-image: url("/images/film-grain.webp"); background-repeat: repeat; background-size: 320px 320px; mix-blend-mode: soft-light; opacity: .18; }

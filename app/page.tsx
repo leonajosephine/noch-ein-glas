@@ -116,11 +116,11 @@ export default function Home() {
 
         <section className="closing page-width" aria-label="Ein Abend bei uns">
           <figure className="closing-wide">
-            <div className="plate-photo photo"><Image src="/images/plates.webp" alt="Kleine Teller werden geteilt, eine Hand greift nach dem nächsten Bissen." fill sizes="(max-width: 700px) 90vw, 55vw" /></div>
+            <div className="plate-photo photo"><Image src="/images/table-overhead.webp" alt="Ein Tisch von oben mit Oliven, Brot, Burrata, Ofengemüse, Weißwein und Negroni." fill sizes="(max-width: 700px) 90vw, 55vw" /></div>
             <figcaption className="handwritten">bis gleich.</figcaption>
           </figure>
           <figure className="closing-narrow">
-            <div className="wine-photo photo"><Image src="/images/wine.webp" alt="Ein Glas Rotwein auf einer zerknitterten Leinenserviette am Ende des Abends." fill sizes="(max-width: 700px) 52vw, 30vw" /></div>
+            <div className="wine-photo photo"><Image src="/images/white-wine.webp" alt="Ein Glas Weißwein neben einer Leinenserviette auf einem Tisch im Kerzenlicht." fill sizes="(max-width: 700px) 52vw, 30vw" /></div>
             <Image className="olive-sketch" src="/images/olive.png" alt="" width={150} height={95} />
           </figure>
         </section>
