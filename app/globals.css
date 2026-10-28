@@ -1,26 +1,154 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root { --paper: #eee7d9; --ink: #241b1a; --rule: #b8aa96; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 32px; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-editorial), Georgia, serif; font-size: 18px; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+button { background: none; border: 0; padding: 0; }
+a, button { text-underline-offset: 6px; }
+a:hover, button:not(.button):hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
+::selection { background: #d1c2aa; color: var(--ink); }
+.page-width { width: 92%; max-width: 1680px; margin-inline: auto; }
+.site-header { display: flex; align-items: center; justify-content: space-between; min-height: 112px; border-bottom: 1px solid var(--ink); gap: 20px; }
+.eyebrow { font-size: 13px; text-transform: uppercase; letter-spacing: .22em; }
+.site-header nav { display: flex; align-items: center; gap: 44px; font-size: 16px; }
+.button { border: 1px solid var(--ink); min-height: 58px; display: inline-flex; align-items: center; justify-content: center; padding: 15px 30px; font-size: 17px; letter-spacing: .025em; transition: color .2s, background-color .2s; }
+.button:hover { color: var(--paper); background: var(--ink); text-decoration: none; }
+.header-reserve { min-height: 48px; padding: 10px 26px; font-size: 15px; }
+.masthead { padding: 57px 0 72px; text-align: center; }
+h1 { font-family: var(--font-editorial), Georgia, serif; font-size: clamp(70px, 15.7vw, 286px); font-weight: 800; letter-spacing: -.065em; line-height: 1.03; margin: 0; white-space: nowrap; }
+.intro { display: grid; grid-template-columns: 36.2% 63.8%; width: 96%; max-width: 1750px; margin: 0 0 0 auto; }
+.intro-copy { padding: 48px 36px 24px 0; }
+.handwritten { font-family: var(--font-handwriting), cursive; font-weight: 400; }
+.intro h2 { font-size: clamp(60px, 6.55vw, 115px); line-height: 1.1; letter-spacing: -.045em; transform: rotate(-5deg); transform-origin: left center; margin: 0 0 42px; }
+.intro p { font-size: clamp(20px, 1.75vw, 30px); line-height: 1.5; margin: 0 0 49px 20px; }
+.reservation-button { margin-left: 20px; }
+.bottle-sketch { display: block; width: 145px; height: 206px; object-fit: contain; margin: 43px 0 0 60px; }
+.photo { position: relative; overflow: hidden; }
+.photo img { object-fit: cover; }
+.hero-photo { aspect-ratio: 1 / 1; }
+.cinematic { width: 100%; aspect-ratio: 1.74 / 1; max-height: 1000px; margin-top: 68px; }
+.menu-section { display: grid; grid-template-columns: 43% 57%; align-items: center; padding: 76px 20px 0; scroll-margin-top: 24px; }
+.menu-copy { padding-right: 90px; }
+.menu-copy h2 { font-size: clamp(34px, 3.8vw, 56px); font-weight: 400; letter-spacing: -.045em; line-height: 1.2; margin: 0 0 44px; }
+.dish-list { margin: 0; padding: 0; list-style: none; }
+.dish-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--rule); font-size: 22px; line-height: 1.5; }
+.dish-list li span:last-child { white-space: nowrap; }
+.text-link { font-size: 16px; text-decoration: underline; text-underline-offset: 7px; }
+.menu-copy .text-link { margin-top: 38px; }
+.cocktail-figure { margin: 0; position: relative; padding-right: 83px; }
+.cocktail-photo { aspect-ratio: 1.16 / 1; }
+.cocktail-note { position: absolute; right: -5px; top: 15%; transform: rotate(-9deg); font-size: 32px; line-height: 1.1; }
+.closing { display: grid; grid-template-columns: 61.5% 33.5%; justify-content: space-between; align-items: start; padding: 75px 20px 0; }
+.closing figure { margin: 0; }
+.closing-wide { padding-top: 18px; }
+.plate-photo { aspect-ratio: 1.58 / 1; }
+.wine-photo { aspect-ratio: .76 / 1; }
+.closing-wide figcaption { margin: 25px 0 0 12px; font-size: 51px; transform: rotate(-5deg); }
+.olive-sketch { display: block; object-fit: contain; width: 132px; height: 104px; margin: 24px 0 0 auto; }
+.site-footer { border-top: 1px solid var(--ink); padding: 35px 0 60px; margin-top: 42px; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 18px; }
+.skip-link { position: fixed; z-index: 10; top: 12px; left: 12px; background: var(--ink); color: var(--paper); padding: 14px 20px; transform: translateY(-180%); }
+.skip-link:focus { transform: translateY(0); }
+.site-dialog { position: fixed; margin: auto; width: min(590px, calc(100% - 32px)); max-height: calc(100dvh - 40px); overflow: auto; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); padding: 32px 36px 40px; overscroll-behavior: contain; }
+.site-dialog::backdrop { background: rgb(24 17 14 / .65); }
+.dialog-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.dialog-top .eyebrow { font-size: 11px; }
+.dialog-top .text-link { font-size: 13px; }
+.site-dialog h2 { margin: 36px 0 20px; font-size: 40px; font-weight: 400; line-height: 1.15; letter-spacing: -.04em; }
+.site-dialog p { font-size: 17px; line-height: 1.6; margin: 0 0 24px; }
+.site-dialog .dialog-intro { margin-bottom: 28px; }
+.site-dialog form { display: grid; gap: 20px; }
+.site-dialog label { display: grid; gap: 8px; font-size: 15px; }
+.site-dialog input, .site-dialog select { border: 1px solid var(--rule); border-radius: 0; background: transparent; width: 100%; min-width: 0; min-height: 48px; padding: 10px 12px; font-size: 16px; }
+.form-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.site-dialog .demo-note { font-size: 13px; line-height: 1.6; margin: 12px 0 0; color: #65594d; }
+.site-dialog .booking-summary { font-size: 25px; }
+.confirmation .button { margin-top: 28px; }
+.full-menu h3 { font-weight: 400; font-size: 25px; margin: 30px 0 5px; }
+.full-menu .dish-list li { font-size: 15px; padding: 15px 0; }
+.site-dialog > .button { margin-top: 6px; }
+@media (min-width: 701px) { .masthead { width: 96%; } .masthead h1 { font-size: clamp(70px, 16.7vw, 294px); } }
+@media (min-width: 1826px) { .intro { margin-inline: auto; } }
+@media (max-width: 1000px) and (min-width: 701px) { .intro-copy { padding-top: 28px; } .intro h2 { font-size: 6.3vw; margin-bottom: 22px; } .intro p { font-size: 18px; margin-left: 5px; margin-bottom: 24px; } .reservation-button { margin-left: 5px; padding: 12px 18px; font-size: 15px; min-height: 48px; } .bottle-sketch { width: 100px; height: 128px; margin-top: 22px; margin-left: 30px; } .menu-copy { padding-right: 40px; } .cocktail-figure { padding-right: 58px; } .cocktail-note { font-size: 27px; } .dish-list li { font-size: 15px; } }
+@media (max-width: 700px) {
+  body { font-size: 16px; }
+  .page-width { width: calc(100% - 40px); }
+  .site-header { min-height: 82px; gap: 12px; }
+  .eyebrow { font-size: 9px; letter-spacing: .14em; max-width: 110px; line-height: 1.6; }
+  .site-header nav { gap: 17px; font-size: 12px; }
+  .header-reserve { min-height: 40px; padding: 8px 12px; font-size: 12px; }
+  .masthead { padding: 34px 0 38px; }
+  h1 { font-size: 15.4vw; letter-spacing: -.065em; }
+  .intro { width: 100%; display: flex; flex-direction: column; }
+  .intro-copy { padding: 10px 24px 37px; position: relative; }
+  .intro h2 { font-size: clamp(62px, 12vw, 84px); line-height: 1.02; margin: 0 0 25px; transform: rotate(-4deg); }
+  .intro p { margin: 0 0 26px; font-size: 18px; line-height: 1.5; }
+  .reservation-button { margin: 0; min-height: 48px; padding: 12px 23px; font-size: 15px; }
+  .bottle-sketch { position: absolute; right: 32px; top: 145px; width: 78px; height: 120px; margin: 0; }
+  .hero-photo { width: calc(100% - 40px); margin-inline: auto; aspect-ratio: 1 / 1.06; }
+  .cinematic { margin-top: 40px; aspect-ratio: .95 / 1; }
+  .cinematic img { object-position: 52% center; }
+  .menu-section { grid-template-columns: 1fr; padding: 55px 0 0; gap: 40px; }
+  .menu-copy { padding: 0; }
+  .menu-copy h2 { font-size: 36px; margin-bottom: 15px; }
+  .dish-list li { font-size: 15px; padding: 20px 0; }
+  .menu-copy .text-link { margin-top: 27px; font-size: 14px; }
+  .cocktail-figure { padding-right: 49px; }
+  .cocktail-note { right: -4px; top: 20%; font-size: 26px; }
+  .cocktail-photo { aspect-ratio: 1 / 1.05; }
+  .closing { display: flex; flex-direction: column; padding: 48px 0 0; gap: 25px; }
+  .closing-wide { width: 100%; padding-top: 0; }
+  .closing-wide figcaption { margin: 15px 0 0 5px; font-size: 38px; }
+  .closing-narrow { width: 64%; align-self: flex-end; }
+  .wine-photo { aspect-ratio: .8 / 1; }
+  .olive-sketch { width: 95px; height: 75px; margin-top: 13px; }
+  .site-footer { margin-top: 30px; padding: 26px 0 35px; flex-wrap: wrap; gap: 24px; font-size: 12px; }
+  .site-footer > div { flex-basis: 100%; text-align: right; }
+  .site-dialog { padding: 24px; }
+  .site-dialog h2 { font-size: 34px; }
+  .form-pair { gap: 12px; }
 }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* The menu reads like a printed sheet; its illustrations stay in the margins. */
+.site-dialog.menu-dialog { width: min(850px, calc(100% - 32px)); padding: 0 42px 30px; }
+.menu-dialog .dialog-top { position: sticky; top: 0; z-index: 2; background: var(--paper); min-height: 76px; border-bottom: 1px solid var(--rule); }
+.menu-dialog .dialog-top .text-link { min-height: 44px; padding-inline: 4px; }
+.menu-dialog > h2 { font-size: 58px; margin: 28px 0 0; line-height: 1.15; }
+.menu-introduction { position: relative; padding: 8px 110px 28px 0; }
+.site-dialog .menu-introduction p { font-size: 29px; line-height: 1.2; margin: 0; transform: rotate(-3deg); transform-origin: left; }
+.menu-olive { position: absolute; right: 5px; top: -45px; width: 95px; height: 78px; object-fit: contain; transform: rotate(-8deg); }
+.menu-columns { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; }
+.full-menu h3 { font-size: 26px; font-weight: 400; margin: 4px 0 12px; padding-bottom: 13px; border-bottom: 1px solid var(--ink); }
+.menu-items { margin: 0; padding: 0; list-style: none; }
+.menu-items li { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px; padding: 16px 0; border-bottom: 1px solid #b8aa9659; }
+.menu-items li:last-child { border: 0; }
+.menu-item-copy { min-width: 0; }
+.menu-item-copy h4 { font-size: 20px; font-weight: 400; line-height: 1.25; margin: 0 0 7px; }
+.site-dialog .menu-item-copy p { font-size: 14px; line-height: 1.6; color: #64564b; margin: 0; }
+.menu-item-price { padding-top: 1px; font-size: 18px; line-height: 1.4; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.menu-margin-note { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 14px 0 0; transform: rotate(4deg); }
+.menu-margin-note img { width: 62px; height: 100px; object-fit: contain; }
+.menu-margin-note span { font-size: 30px; transform: rotate(-9deg); }
+.menu-footnote { border-top: 1px solid var(--rule); padding-top: 20px; margin-top: 22px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; }
+.site-dialog .menu-footnote p { font-size: 12px; line-height: 1.6; color: #64564b; margin: 0; }
+@media (max-width: 650px) {
+  .site-dialog.menu-dialog { padding: 0 24px 26px; }
+  .menu-dialog .dialog-top { min-height: 66px; }
+  .menu-dialog > h2 { font-size: 46px; margin-top: 24px; }
+  .menu-introduction { padding: 12px 75px 30px 0; }
+  .site-dialog .menu-introduction p { font-size: 25px; }
+  .menu-olive { width: 68px; height: 64px; right: -5px; top: -35px; }
+  .menu-columns { grid-template-columns: 1fr; gap: 32px; }
+  .full-menu h3 { font-size: 25px; }
+  .menu-item-copy h4 { font-size: 21px; }
+  .site-dialog .menu-item-copy p { font-size: 14px; }
+  .menu-item-price { font-size: 19px; }
+  .menu-margin-note { justify-content: flex-end; padding: 22px 12px 0; }
+  .menu-footnote { margin-top: 28px; }
 }
